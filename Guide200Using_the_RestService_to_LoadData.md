@@ -41,98 +41,101 @@ To **log issues**, click [here](https://github.com/Abdul-Rafae-Mohammed/StepBySt
 
 **STEP 1.1: Clone the docker file from github**
 
-    - Now, we are going to setup the environment for the application we are going to integrate with the database. Here we are going to use docker to utilize the benfits of a Microservices architecture.
-    - Replicate the docker file from <a href="./Guide100Create_a_RestService_on_ATP.md" target="_blank">this</a> repository.
+- Now, we are going to setup the environment for the application we are going to integrate with the database. Here we are going to use docker to utilize the benfits of a Microservices architecture.
+- Replicate the docker file from <a href="./Guide100Create_a_RestService_on_ATP.md" target="_blank">this</a> repository.
 
-    - Before that navigate to the folder where you want to download the application or create a new folder and navigate to it.
-    - Create a directory for the application, lets say "APPTwitter".
+- Before that navigate to the folder where you want to download the application or create a new folder and navigate to it.
+- Create a directory for the application, lets say "APPTwitter".
 
     ```
     mkdir /APPTwitter
     ```
-    - Move to that directory
+
+- Move to that directory
 
     ```
     cd /APPTwitter
     ```
-    - Clone the Github Repository by executing this command on your terminal window.
+
+- Clone the Github Repository by executing this command on your terminal window.
 
     ```
     git clone https://github.com/Abdul-Rafae-Mohammed/Deploying-Python-TweetStreamingApp-as-a-Microservice.git
     ```
-    
-    - Go inside the Deploying-Python-TweetStreamingApp-as-a-Microservice Directory
+
+- Go inside the Deploying-Python-TweetStreamingApp-as-a-Microservice Directory
 
     ```
     cd Deploying-Python-TweetStreamingApp-as-a-Microservice
     ```
-    
-    - Make Sure Docker Application on your machine is started. and is up and running.
 
-    - If you have any existing docker images you can remove it by running the following commands:  
+- Make Sure Docker Application on your machine is started. and is up and running.
+
+- If you have any existing docker images you can remove it by running the following commands:  
 
     ```
     docker rm -f $(docker ps -a -q)
 
     docker rmi -f $(docker images -q)
     ```
-    
-    - Build the docker image by run the following command 
+
+- Build the docker image by run the following command 
 
     ```
     docker build -t twitter .
     ```
 
-    - Deploy and run the application by using the following command 
+- Deploy and run the application by using the following command 
 
     ```
     docker run -i -p 3050:3050 -t twitter sh
     ```
 
-    - Go inside the docker image directory
+- Go inside the docker image directory
+
     ```
     cd TweetStreamingusingPythonintoOracleDBusingORDS
     ```
 
-    You will see:
-    - Python Application: **Real_Time_TweetStreaming_using_Rest_Service.py**
-    - Config file: **config_rest.txt**
+You will see:
+- Python Application: **Real_Time_TweetStreaming_using_Rest_Service.py**
+- Config file: **config_rest.txt**
 
-    ![](./images/400/Picture400-1.png)
+![](./images/400/Picture400-1.png)
 
 **STEP 1.2: Setup the database for the Python Application(Optional)**
 
-    - This step is optional.
-    - This step is only required if you do not have the database setup already.
-    - Follow the below steps to setup the database.
+- This step is optional.
+- This step is only required if you do not have the database setup already.
+- Follow the below steps to setup the database.
 
-        **Creating Users and Tables for the users in DBCS**
+**Creating Users and Tables for the users in DBCS**
 
-        Now, connect to the provisioned ATP instance using SQL Developer or SQL Client. We will now create a user and create a table to load JSON data into it by connecting to ATP as ADMIN user.
+Now, connect to the provisioned ATP instance using SQL Developer or SQL Client. We will now create a user and create a table to load JSON data into it by connecting to ATP as ADMIN user.
 
-        - Right click DB connection on the connections panel in SQl Developer.
+- Right click DB connection on the connections panel in SQl Developer.
 
-            ![](./images/200/Picture209.png)
+    ![](./images/200/Picture209.png)
 
-        - Click on new **Open SQl Worksheet** option. A new worksheet will be opened.
+- Click on new **Open SQl Worksheet** option. A new worksheet will be opened.
 
-        - Execute the below SQL commands to create user and table in that schema.
+- Execute the below SQL commands to create user and table in that schema.
 
-            ```
-            create user <SchameName> identified by WElCome12_34#;
-            alter user <SchameName> quota unlimited on data;
-            grant connect, resource to <SchemaName>;
-            ```
+    ```
+    create user <SchameName> identified by WElCome12_34#;
+    alter user <SchameName> quota unlimited on data;
+    grant connect, resource to <SchemaName>;
+    ```
 
-            ```
-            CREATE TABLE <schema>.JsonTweets (ts TIMESTAMP,TWEETJSON CLOB CONSTRAINT check_json CHECK (TWEETJSON IS JSON));
-            ```
+    ```
+    CREATE TABLE <schema>.JsonTweets (ts TIMESTAMP,TWEETJSON CLOB CONSTRAINT check_json CHECK (TWEETJSON IS JSON));
+    ```
 
-            ```
-            ALTER TABLE <schema>.jsontweets ADD CONSTRAINT check_nn CHECK (TWEETJSON IS not null);
-            ```
+    ```
+    ALTER TABLE <schema>.jsontweets ADD CONSTRAINT check_nn CHECK (TWEETJSON IS not null);
+    ```
 
-        - Now, you have setup the schema and the tables.
+- Now, you have setup the schema and the tables.
 
 ### **STEP 2: Setting up the configuration file for the Python App**
 
