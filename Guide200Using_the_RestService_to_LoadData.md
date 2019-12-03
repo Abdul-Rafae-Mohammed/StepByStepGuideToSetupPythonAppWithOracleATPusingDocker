@@ -42,7 +42,7 @@ To **log issues**, click [here](https://github.com/Abdul-Rafae-Mohammed/StepBySt
 **STEP 1.1: Clone the docker file from github**
 
 - Now, we are going to setup the environment for the application we are going to integrate with the database. Here we are going to use docker to utilize the benfits of a Microservices architecture.
-- Replicate the docker file from <a href="./Guide100Create_a_RestService_on_ATP.md" target="_blank">this</a> repository.
+- Replicate the docker file from <a href="https://github.com/Abdul-Rafae-Mohammed/Deploying-Python-TweetStreamingApp-as-a-Microservice" target="_blank">this</a> repository.
 
 - Before that navigate to the folder where you want to download the application or create a new folder and navigate to it.
 - Create a directory for the application, lets say "APPTwitter".
